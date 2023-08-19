@@ -5,10 +5,19 @@
 .container { max-width:800px;display:flex; align-items:center; margin:0 auto; height:100vh;  }
 
 .jogo { position:relative; width:100%; height:550px; background:linear-gradient(#77F8F1, #93BEDF); display:block; margin:0 auto; padding:40px; overflow:hidden; }
-.obstaculo { width:80px; position:absolute; bottom:0; }
+.obstaculo { width:80px; position:absolute; bottom:0; animation:animacao-obstaculo 1s infinite linear; }
 .personagem { width:100px; bottom:0; position:absolute; }
 .game-over { }
 .game-over h2 { font-size:45px; }
 
 button.reset { width:100px; text-transform:uppercase; height:40px; border-radius:15px; background:#333; color:#FFF; margin:40px 0; }
 button.reset:hover { color:#333; background:#FFF; }
+
+@keyframes animacao-obstaculo {
+    from{
+        right:-150px;
+    }
+    to {
+        right:100%;
+    }
+}
