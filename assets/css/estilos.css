@@ -21,7 +21,7 @@ button.reset:hover { color:#333; background:#FFF; cursor:pointer }
     to {
         right:100%;
     }
-}
+}  
 
 @keyframes pulo-personagem {
     0% {
