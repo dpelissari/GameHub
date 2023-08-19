@@ -7,6 +7,7 @@
 .jogo { position:relative; width:100%; height:550px; background:linear-gradient(#77F8F1, #93BEDF); display:block; margin:0 auto; padding:40px; overflow:hidden; }
 .obstaculo { width:80px; position:absolute; bottom:0; animation:animacao-obstaculo 1s infinite linear; }
 .personagem { width:100px; bottom:0; position:absolute; }
+.pulo-personagem { animation:pulo-personagem 650ms ease-out; }
 .game-over { }
 .game-over h2 { font-size:45px; }
 
@@ -19,5 +20,19 @@ button.reset:hover { color:#333; background:#FFF; }
     }
     to {
         right:100%;
+    }
+}
+
+@keyframes pulo-personagem {
+    0% {
+        bottom: 0;
+    }
+
+    50% {
+        bottom:200px;
+    }
+
+    100% {
+        bottom:0;
     }
 }
