@@ -8,11 +8,11 @@
 .obstaculo { width:80px; position:absolute; bottom:0; animation:animacao-obstaculo 1s infinite linear; }
 .personagem { width:100px; bottom:0; position:absolute; left:40px; }
 .pulo-personagem { animation:pulo-personagem 650ms ease-out; }
-.game-over { }
+.game-over { display:none; }
 .game-over h2 { font-size:45px; }
 
-button.reset { width:100px; text-transform:uppercase; height:40px; border-radius:15px; background:#333; color:#FFF; margin:40px 0; }
-button.reset:hover { color:#333; background:#FFF; }
+button.reset { width:180px; text-transform:uppercase; height:40px; border-radius:15px; background:#333; color:#FFF; margin:40px 0; font-size:20px; }
+button.reset:hover { color:#333; background:#FFF; cursor:pointer }
 
 @keyframes animacao-obstaculo {
     from{
