@@ -4,9 +4,9 @@
 
 .container { max-width:800px;display:flex; align-items:center; margin:0 auto; height:100vh;  }
 
-.jogo { position:relative; width:100%; height:550px; background:linear-gradient(#77F8F1, #93BEDF); display:block; margin:0 auto; padding:40px; overflow:hidden; }
+.jogo { position:relative; width:100%; height:550px; background:linear-gradient(#77F8F1, #93BEDF); display:block; margin:0 auto; padding:40px;  overflow:hidden; }
 .obstaculo { width:80px; position:absolute; bottom:0; animation:animacao-obstaculo 1s infinite linear; }
-.personagem { width:100px; bottom:0; position:absolute; }
+.personagem { width:100px; bottom:0; position:absolute; left:40px; }
 .pulo-personagem { animation:pulo-personagem 650ms ease-out; }
 .game-over { }
 .game-over h2 { font-size:45px; }
