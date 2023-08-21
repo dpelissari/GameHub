@@ -1,38 +1,53 @@
-* { margin:0; padding:0; border:0; box-sizing:border-box; font-family: 'Concert One', cursive; }
+* { margin:0; padding:0; border:0; box-sizing:border-box;}
+body { background: linear-gradient(#93BEDF, #77F8F1);  }
 
-@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Concert+One&family=Raleway:wght@100;600&display=swap');
-
-.container { max-width:800px;display:flex; align-items:center; margin:0 auto; height:100vh;  }
-
-.jogo { position:relative; width:100%; height:550px; background:linear-gradient(#77F8F1, #93BEDF); display:block; margin:0 auto; padding:40px;  overflow:hidden; }
-.obstaculo { width:80px; position:absolute; bottom:0; animation:animacao-obstaculo 1s infinite linear; }
+.container { max-width:1200px;display:flex; align-items:center; margin:0 auto; height:100vh;  }
+.jogo { position:relative; width:100%; height:550px; background:linear-gradient(#77F8F1, #93BEDF); display:block; margin:0 auto; padding:40px;  overflow:hidden; border-radius:16px; }
+.sol { display:block; width:auto; margin:0 auto;  animation:sol 1s infinite ease-in-out alternate; z-index:1;}
+.nuvem { position:absolute; top:20px;   }
+.esquerda { animation:nuvem-esquerda 60s ease-out infinite; }
+.direita { animation:nuvem-direita 85s ease-out infinite; width:250px; }
+.obstaculo { width:110px; position:absolute; bottom:0; animation:animacao-obstaculo 1.3s infinite linear; }
 .personagem { width:100px; bottom:0; position:absolute; left:40px; }
 .pulo-personagem { animation:pulo-personagem 650ms ease-out; }
-.game-over { display:none; }
-.game-over h2 { font-size:45px; }
+.painel { display:flex; justify-content:space-around; align-items:center; margin-top:70px; font-family: 'Bungee Spice', cursive;}
+.placar h1 { font-size:20px; }
+.placar span { font-size:28px; }
+.game-over { display:none;  }
+.game-over h2 { font-size:40px; animation:game-over 0.8s ease-out; position:relative;}
 
-button.reset { width:180px; text-transform:uppercase; height:40px; border-radius:15px; background:#333; color:#FFF; margin:40px 0; font-size:20px; }
+button.reset {  display:none; width:120px; text-transform:uppercase; height:40px; border-radius:15px; background:#333; color:#FFF; margin:20px 0; font-size:16px; animation:game-over 0.8s ease-out; position:relative; font-family: 'Bungee Spice', cursive; }
 button.reset:hover { color:#333; background:#FFF; cursor:pointer }
+button.trilha-sonora { background:red; padding:15px;}
+
+@keyframes sol {
+    from { transform:scale(1);}
+    to { transform: scale(1.1); }
+}
+
+@keyframes nuvem-esquerda {
+    from { right:-250px; }
+    to { right:100%; }
+}
+
+@keyframes nuvem-direita {
+    from { left:-250px; }
+    to { left:100%; }
+}
 
 @keyframes animacao-obstaculo {
-    from{
-        right:-150px;
-    }
-    to {
-        right:100%;
-    }
+    from { right:-150px; }
+    to { right:100%; }
 }
 
 @keyframes pulo-personagem {
-    0% {
-        bottom: 0;
-    }
+    0% { bottom: 0; }
+    50% { bottom:200px; }
+    100% { bottom:0; }
+}
 
-    50% {
-        bottom:200px;
-    }
-
-    100% {
-        bottom:0;
-    }
+@keyframes game-over {
+    0% { left:-600px; }
+    50% { left:300px; }
+    100% { left:0; }
 }
