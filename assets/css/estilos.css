@@ -15,10 +15,11 @@ body { background: linear-gradient(#93BEDF, #77F8F1);  }
 .placar span { font-size:28px; }
 .game-over { display:none;  }
 .game-over h2 { font-size:40px; animation:game-over 0.8s ease-out; position:relative;}
+.fim { animation:fim 1.2s ease-in-out forwards; } 
 
 button.reset {  display:none; width:120px; text-transform:uppercase; height:40px; border-radius:15px; background:#333; color:#FFF; margin:20px 0; font-size:16px; animation:game-over 0.8s ease-out; position:relative; font-family: 'Bungee Spice', cursive; }
 button.reset:hover { color:#333; background:#FFF; cursor:pointer }
-button.trilha-sonora { background:red; padding:15px;}
+button.trilha-sonora { background:red; padding:15px; }
 
 @keyframes sol {
     from { transform:scale(1);}
@@ -50,4 +51,13 @@ button.trilha-sonora { background:red; padding:15px;}
     0% { left:-600px; }
     50% { left:300px; }
     100% { left:0; }
+}
+
+@keyframes fim {
+    0% { bottom:0; opacity:0.9; }
+    50% { bottom:200px; opacity:0.8; }
+    70% { bottom:250px; opacity:0.7;}
+    80% { bottom:200px; opacity:0.6;}
+    90% { bottom:100px; opacity:0.5;}
+    100% { bottom:-550px; opacity:0.1; }
 }

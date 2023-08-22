@@ -29,6 +29,7 @@ const puloPersonagem = function () {
     // executa o som do pulo
     somPulo.play();
 
+    // executa a trilha sonora do jogo
     trilha.play();
 
     // tempo de reproducao do som do pulo apos audio ter sido executado
@@ -75,6 +76,9 @@ const loop = setInterval(() => {
         // exibe o botao reset
         btnReset.style.display = 'block';
 
+        // add animacao para sumir personagem
+        personagem.classList.add('fim');
+     
         // remove o evento de pulo para evitar pontos após jogo chegar ao fim
         document.removeEventListener('keydown', puloPersonagem);
 
