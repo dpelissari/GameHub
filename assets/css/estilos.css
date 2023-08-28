@@ -23,3 +23,6 @@ button.start:hover { color:#333; background:#FFF; cursor:pointer }
 .game-over { display:none;  }
 .game-over h2 { font-size:40px; animation:game-over 0.8s ease-out; position:relative;}
 .fim { animation:fim 1.2s ease-in-out forwards; } 
+
+.ultimas-pontuacoes { border:1px dashed #404040; width:fit-content; padding:0 20px; border-radius:10px; position:absolute; display:none; }
+.ultimas-pontuacoes .item { margin:10px 0; }

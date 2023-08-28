@@ -5,9 +5,12 @@ const obstaculo = document.querySelector(".obstaculo");
 const pontuacaoJogador = document.querySelector(".pontos");
 const gameOver = document.querySelector(".game-over");
 const painel = document.querySelector(".painel");
-const sol = document.querySelector('.sol');
-const nuvens = document.querySelectorAll('.nuvem');
-const btnStart = document.querySelector('.start');
+const sol = document.querySelector(".sol");
+const nuvens = document.querySelectorAll(".nuvem");
+const btnStart = document.querySelector(".start");
+const painelUltimasPontuacoes = document.querySelector(".ultimas-pontuacoes");
+
+let ultimasPontuacoes = [];
 
 function comecarJogo() {
     // define pontuacao inicial
@@ -30,6 +33,9 @@ function comecarJogo() {
 
     // oculta botao de inicio de jogo
     btnStart.style.display = 'none';
+
+    // oculta painel com ultimas pontuacoes
+    painelUltimasPontuacoes.style.display = 'none';
 
     // exibe painel com pontuacao
     painel.style.display = 'flex';
@@ -63,9 +69,6 @@ function comecarJogo() {
         // executa o som do pulo
         somPulo.play();
 
-        // executa a trilha sonora do jogo
-        trilhaSonora.play();
-
         // tempo de reproducao do som do pulo apos audio ter sido executado
         somPulo.currentTime = 0;
 
@@ -92,7 +95,7 @@ function comecarJogo() {
             // remove anicacao do obstaculo
             obstaculo.style.animation = 'none';
     
-            // define a posicao do obstaculo no momento da colis�o
+            // define a posicao do obstaculo no momento da colisao
             obstaculo.style.left = `${posicaoObstaculo}px`;
     
             // para a trilha sonora
@@ -103,6 +106,27 @@ function comecarJogo() {
     
             // tempo de reproducao do  som de game over apos audio ja ter sido executado
             somGameOver.currentTime = 0;
+
+            const pontuacaoAtual = { pontos: pontos, tempo: pontos, data: Date.now() };
+            const pontuacoesAnteriores = JSON.parse(localStorage.getItem('pontuacoes')) || [];
+
+            // Mantém apenas as últimas 3 pontuações
+            if (pontuacoesAnteriores.length > 3) {
+                pontuacoesAnteriores.shift(); // Remove o elemento mais antigo
+            }
+
+            // Verifica se a pontuação atual já existe nas pontuações anteriores
+            const pontuacaoJaExiste = pontuacoesAnteriores.some(pontuacao => pontuacao.data === pontuacaoAtual.data);
+
+            if (!pontuacaoJaExiste) {
+                pontuacoesAnteriores.push(pontuacaoAtual);
+            }
+
+            // salva pontuacao no localstorage
+            localStorage.setItem('pontuacoes', JSON.stringify(pontuacoesAnteriores));
+
+            // Chame a função para exibir as pontuações após a remoção do evento de pulo
+            exibirUltimasPontuacoes();
     
             // exibe o game over
             gameOver.style.display = 'block';
@@ -126,3 +150,33 @@ function comecarJogo() {
     // evento p/ detectar quando usuario pressiona alguma tecla, ao acontecer chama a funcao puloPersonagem
     document.addEventListener('keydown', puloPersonagem);
 }
+
+function exibirUltimasPontuacoes() { 
+
+    // obtem as pontuacoes armazenadas no LS
+    const pontuacoesLS = localStorage.getItem('pontuacoes');
+
+    if (pontuacoesLS) {
+
+        // converte as pontuacoes armazenadas de JSON para array de objetos
+        const ultimasPontuacoes = JSON.parse(pontuacoesLS);
+
+        // mantem  apenas as 3 ultimas pontuações
+        const ultimasTresPontuacoes = ultimasPontuacoes.slice(-3);
+
+        // limpa o conteúdo anterior das pontuacoes exibidas
+        painelUltimasPontuacoes.innerHTML = '';
+
+        //  cria elementos para exibicao
+        for (const pontuacao of ultimasTresPontuacoes) {
+            const pontuacaoItem = document.createElement('p');
+            pontuacaoItem.textContent = `Pontos: ${pontuacao.pontos}, Tempo: ${pontuacao.tempo}`;
+            painelUltimasPontuacoes.appendChild(pontuacaoItem);
+        }
+
+        // exibe o painel com ultimas pontuacoes
+        painelUltimasPontuacoes.style.display = 'block';
+    }
+}
+
+exibirUltimasPontuacoes();
