@@ -25,4 +25,4 @@ button.start:hover { color:#333; background:#FFF; cursor:pointer }
 .fim { animation:fim 1.2s ease-in-out forwards; } 
 
 .ultimas-pontuacoes { border:1px dashed #404040; width:fit-content; padding:0 20px; border-radius:10px; position:absolute; display:none; }
-.ultimas-pontuacoes .item { margin:10px 0; }
+.ultimas-pontuacoes p{ margin:10px 0; }

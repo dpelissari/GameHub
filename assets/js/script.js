@@ -9,12 +9,20 @@ const sol = document.querySelector(".sol");
 const nuvens = document.querySelectorAll(".nuvem");
 const btnStart = document.querySelector(".start");
 const painelUltimasPontuacoes = document.querySelector(".ultimas-pontuacoes");
+let tempo = document.querySelector(".tempo");
 
 let ultimasPontuacoes = [];
+let tempoDecorrido = 0; 
 
 function comecarJogo() {
     // define pontuacao inicial
     let pontos = 10;
+
+    // Incrementa o tempo decorrido a cada segundo
+    const tempoInterval = setInterval(() => {
+        tempoDecorrido++;
+        tempo.textContent = tempoDecorrido;  
+    }, 1000);
 
     // trilha sonora
     let trilhaSonora = new Audio("./assets/audio/trilha.mp3");
@@ -107,12 +115,13 @@ function comecarJogo() {
             // tempo de reproducao do  som de game over apos audio ja ter sido executado
             somGameOver.currentTime = 0;
 
-            const pontuacaoAtual = { pontos: pontos, tempo: pontos, data: Date.now() };
+            const pontuacaoAtual = { pontos: pontos, tempo: tempoDecorrido, data: Date.now() };
             const pontuacoesAnteriores = JSON.parse(localStorage.getItem('pontuacoes')) || [];
 
             // Mantém apenas as últimas 3 pontuações
             if (pontuacoesAnteriores.length > 3) {
-                pontuacoesAnteriores.shift(); // Remove o elemento mais antigo
+                // Remove o elemento mais antigo
+                pontuacoesAnteriores.shift(); 
             }
 
             // Verifica se a pontuação atual já existe nas pontuações anteriores
@@ -140,6 +149,8 @@ function comecarJogo() {
             // Interrompe o loop
             clearInterval(loop);
 
+            clearInterval(tempoInterval); 
+
             // atualiza pagina automaticamente
             setTimeout(() => {
                 window.location.reload();
@@ -161,19 +172,22 @@ function exibirUltimasPontuacoes() {
         // converte as pontuacoes armazenadas de JSON para array de objetos
         const ultimasPontuacoes = JSON.parse(pontuacoesLS);
 
-        // mantem  apenas as 3 ultimas pontuações
-        const ultimasTresPontuacoes = ultimasPontuacoes.slice(-3);
+        // ordena as pontuacoes pelo mais recente com base na propriedade data
+        ultimasPontuacoes.sort((a, b) => b.data - a.data);
 
-        // limpa o conteúdo anterior das pontuacoes exibidas
+        // mantem apenas as 3 ultimas pontuacoes
+        const ultimasTresPontuacoes = ultimasPontuacoes.slice(0, 3);
+
+        // limpa o conteudo anterior das pontuacoes exibidas
         painelUltimasPontuacoes.innerHTML = '';
 
-        //  cria elementos para exibicao
-        for (const pontuacao of ultimasTresPontuacoes) {
+        // cria elementos para exibicao
+        ultimasTresPontuacoes.forEach(pontuacao => {
             const pontuacaoItem = document.createElement('p');
-            pontuacaoItem.textContent = `Pontos: ${pontuacao.pontos}, Tempo: ${pontuacao.tempo}`;
+            pontuacaoItem.textContent = `Pontos: ${pontuacao.pontos}, Tempo: ${pontuacao.tempo} segundos`;
             painelUltimasPontuacoes.appendChild(pontuacaoItem);
-        }
-
+        });
+        
         // exibe o painel com ultimas pontuacoes
         painelUltimasPontuacoes.style.display = 'block';
     }
