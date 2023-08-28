@@ -1,92 +1,128 @@
 // obtem os elementos principais
-const personagem = document.querySelector(".personagem");
+let jogo = document.querySelector(".jogo");
+let personagem = document.querySelector(".personagem");
 const obstaculo = document.querySelector(".obstaculo");
 const pontuacaoJogador = document.querySelector(".pontos");
 const gameOver = document.querySelector(".game-over");
-const btnReset = document.querySelector(".reset");
+const painel = document.querySelector(".painel");
+const sol = document.querySelector('.sol');
+const nuvens = document.querySelectorAll('.nuvem');
+const btnStart = document.querySelector('.start');
 
-// pontuacao inicial
-let pontos = 10;
+function comecarJogo() {
+    // define pontuacao inicial
+    let pontos = 10;
 
-// trilha sonora
-let trilha= new Audio("./assets/audio/trilha.mp3");
+    // trilha sonora
+    let trilhaSonora = new Audio("./assets/audio/trilha.mp3");
 
-// volume da trilha sonora
-trilha.volume = 0.1;
+    // volume da trilha sonora
+    trilhaSonora.volume = 0.1;
 
-// som ao pular
-let somPulo = new Audio("./assets/audio/pulo.mp3");
+    // som ao pular
+    let somPulo = new Audio("./assets/audio/pulo.mp3");
 
-// volume do pulo
-somPulo.volume = 0.4;
+    // volume do pulo
+    somPulo.volume = 0.4;
 
-// som de game over
-let somGameOver = new Audio("./assets/audio/fim.mp3");
+    // som de game over
+    let somGameOver = new Audio("./assets/audio/fim.mp3");
 
-// inclui e remove a animacao de pulo do personagem
-const puloPersonagem = function () {
+    // oculta botao de inicio de jogo
+    btnStart.style.display = 'none';
 
-    // executa o som do pulo
-    somPulo.play();
+    // exibe painel com pontuacao
+    painel.style.display = 'flex';
 
-    // executa a trilha sonora do jogo
-    trilha.play();
+    // inicia trilha sonora
+    trilhaSonora.play();
 
-    // tempo de reproducao do som do pulo apos audio ter sido executado
-    somPulo.currentTime = 0;
+    // exibe obstaculo
+    obstaculo.style.display = 'block';
 
-    // adiciona a animacao do pulo
-    personagem.classList.add('pulo-personagem');
-    
-    setTimeout(() => {
-        personagem.classList.remove('pulo-personagem')
-        pontos += (3 * 2) / 1;
-        pontuacaoJogador.textContent = pontos;
-    }, 600);
-}
+    // exibe nuvens
+    nuvens.forEach(nuvem => { nuvem.style.display = 'block'});
 
-const loop = setInterval(() => {
+    // exibe sol
+    sol.style.display = 'block';
 
-    // pega a posicao do obstaculo
-    const posicaoObstaculo = obstaculo.offsetLeft;
+    let PersonagemCriado = document.querySelectorAll('.personagem');
 
-    // pega a altura do pulo do personagem 
-    const alturaPuloPersonagem = +window.getComputedStyle(personagem).bottom.replace('px', '');
-
-    if (posicaoObstaculo <= 120 && alturaPuloPersonagem < 80) {
-
-        // remove anicacao do obstaculo
-        obstaculo.style.animation = 'none';
-
-        // define a posicao do obstaculo no momento da colis�o
-        obstaculo.style.left = `${posicaoObstaculo}px`;
-
-        // para a trilha sonora
-        trilha.pause();
-
-        // executa o som de game over
-        somGameOver.play();
-
-        // tempo de reproducao do  som de game over apos audio ja ter sido executado
-        somGameOver.currentTime = 0;
-
-        // exibe o game over
-        gameOver.style.display = 'block';
-
-        // exibe o botao reset
-        btnReset.style.display = 'block';
-
-        // add animacao para sumir personagem
-        personagem.classList.add('fim');
-     
-        // remove o evento de pulo para evitar pontos após jogo chegar ao fim
-        document.removeEventListener('keydown', puloPersonagem);
-
-        // Interrompe o loop
-        clearInterval(loop);
+    // cria o personagem
+    if (PersonagemCriado.length == 0) {
+        personagem = document.createElement("img");
+        personagem.src = "./assets/img/personagem.gif";
+        personagem.className = "personagem";
+        personagem.alt = "Personagem jogo";
+        jogo.appendChild(personagem);
     }
-}, 10)
 
+    // inclui e remove a animacao de pulo do personagem
+    const puloPersonagem = function () {
 
-// evento p/ detectar quando usuario pressiona alguma tecla, ao acontecer chama a funcao puloPersonagem
-document.addEventListener('keydown', puloPersonagem);
+        // executa o som do pulo
+        somPulo.play();
+
+        // executa a trilha sonora do jogo
+        trilhaSonora.play();
+
+        // tempo de reproducao do som do pulo apos audio ter sido executado
+        somPulo.currentTime = 0;
+
+        // adiciona a animacao do pulo
+        personagem.classList.add('pulo-personagem');
+        
+        setTimeout(() => {
+            personagem.classList.remove('pulo-personagem')
+            pontos += (3 * 2) / 1;
+            pontuacaoJogador.textContent = pontos;
+        }, 600);
+    }
+
+    const loop = setInterval(() => {
+
+        // pega a posicao do obstaculo
+        const posicaoObstaculo = obstaculo.offsetLeft;
+    
+        // pega a altura do pulo do personagem 
+        const alturaPuloPersonagem = +window.getComputedStyle(personagem).bottom.replace('px', '');
+    
+        if (posicaoObstaculo <= 120 && alturaPuloPersonagem < 80) {
+    
+            // remove anicacao do obstaculo
+            obstaculo.style.animation = 'none';
+    
+            // define a posicao do obstaculo no momento da colis�o
+            obstaculo.style.left = `${posicaoObstaculo}px`;
+    
+            // para a trilha sonora
+            trilhaSonora.pause();
+    
+            // executa o som de game over
+            somGameOver.play();
+    
+            // tempo de reproducao do  som de game over apos audio ja ter sido executado
+            somGameOver.currentTime = 0;
+    
+            // exibe o game over
+            gameOver.style.display = 'block';
+    
+            // add animacao para sumir personagem
+            personagem.classList.add('fim');
+         
+            // remove o evento de pulo para evitar pontos após jogo chegar ao fim
+            document.removeEventListener('keydown', puloPersonagem);
+    
+            // Interrompe o loop
+            clearInterval(loop);
+
+            // atualiza pagina automaticamente
+            setTimeout(() => {
+                window.location.reload();
+            }, 2600);
+        }
+    }, 10)
+
+    // evento p/ detectar quando usuario pressiona alguma tecla, ao acontecer chama a funcao puloPersonagem
+    document.addEventListener('keydown', puloPersonagem);
+}
