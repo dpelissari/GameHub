@@ -72,22 +72,24 @@ function comecarJogo() {
     }
 
     // inclui e remove a animacao de pulo do personagem
-    const puloPersonagem = function () {
+    const puloPersonagem = function (event) {
+        // se a tecla pressionada for espaço
+        if (event.key === ' ') {
+            // executa o som do pulo
+            somPulo.play();
 
-        // executa o som do pulo
-        somPulo.play();
+            // tempo de reproducao do som do pulo apos audio ter sido executado
+            somPulo.currentTime = 0;
 
-        // tempo de reproducao do som do pulo apos audio ter sido executado
-        somPulo.currentTime = 0;
-
-        // adiciona a animacao do pulo
-        personagem.classList.add('pulo-personagem');
+            // adiciona a animacao do pulo
+            personagem.classList.add('pulo-personagem');
         
-        setTimeout(() => {
-            personagem.classList.remove('pulo-personagem')
-            pontos += (3 * 2) / 1;
-            pontuacaoJogador.textContent = pontos;
-        }, 600);
+            setTimeout(() => {
+                personagem.classList.remove('pulo-personagem')
+                pontos += (3 * 2) / 1;
+                pontuacaoJogador.textContent = pontos;
+            }, 600);
+        }
     }
 
     const loop = setInterval(() => {
@@ -185,10 +187,8 @@ function exibirUltimasPontuacoes() {
             const ConteudoTempo = document.createElement('p');
             conteudoPontuacao.textContent = `Pontos: ${pontuacao.pontos}`;
             ConteudoTempo.textContent = `Tempo: ${pontuacao.tempo} segundos`;
-
             pontuacaoItem.appendChild(conteudoPontuacao);
             pontuacaoItem.appendChild(ConteudoTempo);
-
             painelUltimasPontuacoes.appendChild(pontuacaoItem);
         });
         
