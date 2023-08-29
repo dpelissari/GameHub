@@ -4,7 +4,7 @@ Este é um jogo simples desenvolvido em HTML, CSS e JavaScript onde o personagem
 Personagem criado por: [@gudilarri](https://www.instagram.com/gudilarri/ "@gudilarri") | 
 Desenvolvimento: Daniel Pelissari
 
-![](https://raw.githubusercontent.com/dpelissari/GameHub/28e82e725527347c827d69a157793a3861eb6784/assets/img/gamehub.jpg)
+![](https://github.com/dpelissari/GameHub/blob/main/assets/img/gamehub.jpg?raw=true)
 
 ## Funcionalidades
 - Controle o pulo do personagem pressionando a tecla espaço
