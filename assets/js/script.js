@@ -21,7 +21,7 @@ function comecarJogo() {
     // Incrementa o tempo decorrido a cada segundo
     const tempoInterval = setInterval(() => {
         tempoDecorrido++;
-        tempo.textContent = tempoDecorrido;  
+        tempo.textContent = `Tempo: ${tempoDecorrido}`;  
     }, 1000);
 
     // trilha sonora
@@ -133,9 +133,6 @@ function comecarJogo() {
 
             // salva pontuacao no localstorage
             localStorage.setItem('pontuacoes', JSON.stringify(pontuacoesAnteriores));
-
-            // Chame a função para exibir as pontuações após a remoção do evento de pulo
-            exibirUltimasPontuacoes();
     
             // exibe o game over
             gameOver.style.display = 'block';
@@ -183,8 +180,15 @@ function exibirUltimasPontuacoes() {
 
         // cria elementos para exibicao
         ultimasTresPontuacoes.forEach(pontuacao => {
-            const pontuacaoItem = document.createElement('p');
-            pontuacaoItem.textContent = `Pontos: ${pontuacao.pontos}, Tempo: ${pontuacao.tempo} segundos`;
+            const pontuacaoItem = document.createElement('div');
+            const conteudoPontuacao = document.createElement('p');
+            const ConteudoTempo = document.createElement('p');
+            conteudoPontuacao.textContent = `Pontos: ${pontuacao.pontos}`;
+            ConteudoTempo.textContent = `Tempo: ${pontuacao.tempo} segundos`;
+
+            pontuacaoItem.appendChild(conteudoPontuacao);
+            pontuacaoItem.appendChild(ConteudoTempo);
+
             painelUltimasPontuacoes.appendChild(pontuacaoItem);
         });
         

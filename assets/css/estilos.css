@@ -24,5 +24,6 @@ button.start:hover { color:#333; background:#FFF; cursor:pointer }
 .game-over h2 { font-size:40px; animation:game-over 0.8s ease-out; position:relative;}
 .fim { animation:fim 1.2s ease-in-out forwards; } 
 
-.ultimas-pontuacoes { border:1px dashed #404040; width:fit-content; padding:0 20px; border-radius:10px; position:absolute; display:none; }
-.ultimas-pontuacoes p{ margin:10px 0; }
+.ultimas-pontuacoes { width:250px; background:#333; color:#FFF; border-radius:10px; position:absolute; display:none; font-family: 'Roboto Slab', serif; font-size:16px; animation:pontuacoes 0.8s ease-out; left:70px; display: none; }
+.ultimas-pontuacoes div {display:flex; align-items:center; flex-direction:column; border:1px dashed #ddd; margin:10px; padding:10px; border-radius:15px; }
+.ultimas-pontuacoes p{ margin: 0; }

@@ -38,3 +38,8 @@
     90% { bottom:100px; opacity:0.5;}
     100% { bottom:-550px; opacity:0.1; }
 }
+
+@keyframes pontuacoes {
+    0% { left:-280px; }
+    100% { left:70px; }
+}
