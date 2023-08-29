@@ -1,6 +1,7 @@
 // obtem os elementos principais
 let jogo = document.querySelector(".jogo");
 let personagem = document.querySelector(".personagem");
+let tempo = document.querySelector(".tempo");
 const obstaculo = document.querySelector(".obstaculo");
 const pontuacaoJogador = document.querySelector(".pontos");
 const gameOver = document.querySelector(".game-over");
@@ -9,7 +10,6 @@ const sol = document.querySelector(".sol");
 const nuvens = document.querySelectorAll(".nuvem");
 const btnStart = document.querySelector(".start");
 const painelUltimasPontuacoes = document.querySelector(".ultimas-pontuacoes");
-let tempo = document.querySelector(".tempo");
 
 let ultimasPontuacoes = [];
 let tempoDecorrido = 0; 
@@ -18,7 +18,7 @@ function comecarJogo() {
     // define pontuacao inicial
     let pontos = 10;
 
-    // Incrementa o tempo decorrido a cada segundo
+    // incrementa o tempo decorrido a cada segundo
     const tempoInterval = setInterval(() => {
         tempoDecorrido++;
         tempo.textContent = `Tempo: ${tempoDecorrido}`;  
@@ -120,18 +120,16 @@ function comecarJogo() {
             const pontuacaoAtual = { pontos: pontos, tempo: tempoDecorrido, data: Date.now() };
             const pontuacoesAnteriores = JSON.parse(localStorage.getItem('pontuacoes')) || [];
 
-            // Mantém apenas as últimas 3 pontuações
-            if (pontuacoesAnteriores.length > 3) {
+            // mantem apenas as últimas 3 pontuacoes
+            if (pontuacoesAnteriores.length > 3)
                 // Remove o elemento mais antigo
-                pontuacoesAnteriores.shift(); 
-            }
-
-            // Verifica se a pontuação atual já existe nas pontuações anteriores
+                pontuacoesAnteriores.shift();  
+                            
+            // verifica se a pontuação atual já existe nas pontuações anteriores
             const pontuacaoJaExiste = pontuacoesAnteriores.some(pontuacao => pontuacao.data === pontuacaoAtual.data);
 
-            if (!pontuacaoJaExiste) {
+            if (!pontuacaoJaExiste)
                 pontuacoesAnteriores.push(pontuacaoAtual);
-            }
 
             // salva pontuacao no localstorage
             localStorage.setItem('pontuacoes', JSON.stringify(pontuacoesAnteriores));
@@ -145,9 +143,10 @@ function comecarJogo() {
             // remove o evento de pulo para evitar pontos após jogo chegar ao fim
             document.removeEventListener('keydown', puloPersonagem);
     
-            // Interrompe o loop
+            // interrompe o loop
             clearInterval(loop);
 
+            // interrompe o tempo
             clearInterval(tempoInterval); 
 
             // atualiza pagina automaticamente
