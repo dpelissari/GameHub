@@ -3,7 +3,10 @@ body { background: linear-gradient(#93BEDF, #77F8F1);  }
 
 .container { max-width:1200px;display:flex; align-items:center; margin:0 auto; height:100vh;  }
 
-.jogo { position:relative; width:100%; height:550px; background:linear-gradient(#77F8F1, #93BEDF); display:block; margin:0 auto; padding:40px;  overflow:hidden; border-radius:16px; }
+.jogo { position:relative; width:100%; height:550px;  background: url('../../assets/img/predios.png') center bottom 140px, linear-gradient(#77F8F1, #93BEDF);;
+    
+    background-repeat: repeat-x;
+    display:block; margin:0 auto; padding:40px;  overflow:hidden; border-radius:16px; }
 
 .iniciar { height:550px; display:flex; align-items:center; max-height:100%; }
 button.start {  width:fit-content; padding:5px 20px; text-transform:uppercase; height:40px; border-radius:15px; background:#333; color:#FFF; margin:20px auto; font-size:16px; animation:game-over 1.2s ease-in-out; position:relative; font-family: 'Bungee Spice', cursive; display:block; }
